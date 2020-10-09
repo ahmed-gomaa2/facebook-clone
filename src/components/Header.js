@@ -12,15 +12,29 @@ import AddIcon from '@material-ui/icons/Add'
 import ForumIcon from '@material-ui/icons/Forum'
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 const Header = () => {
+
+    const [active, setActive] = React.useState(false)
+
+    const handleSearchClick = () => {
+        setActive(!active)
+    }
+
     return (
         <div className={'header'}>
             <div className="header__left">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png" alt=""/>
+                <img className={`${active && 'header__logoInActive'}`} src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png" alt=""/>
                 <div className="header__input">
                     <SearchIcon />
                     <input type="text" placeholder={'Search Facebook'}/>
+                </div>
+                <div className="header__hiddenInput">
+                    <KeyboardBackspaceIcon onClick={handleSearchClick} className={`header__hiddenInputGoBack ${active && 'header__hiddenInputGoBackActive'}`} />
+                    <SearchIcon onClick={handleSearchClick} className={`header__hiddenInputIcon ${active && 'header__hiddenInputIconInActive'}`}/>
+                    <input placeholder={'Search in Facebook'} className={`${active && 'header__hiddenInputActive'}`} type="text"/>
+
                 </div>
             </div>
 
